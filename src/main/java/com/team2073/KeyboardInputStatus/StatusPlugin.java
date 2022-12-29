@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Description(group = "com.team2073", name = "KeyboardInputStatus", version = "1.0.0", summary = "A plugin to display status from keyboard inputs")
-public class StatusPlugin extends Plugin {
+public final class StatusPlugin extends Plugin {
     @Override
     public List<DataType> getDataTypes() {
         return List.of(StatusDataType.instance);

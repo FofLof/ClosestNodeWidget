@@ -8,15 +8,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-public class Status extends ComplexData<Status> {
+public final class Status extends ComplexData<Status> {
 
     private String[] statuses;
+
+    public Status(String[] statuses) {
+        this.statuses = statuses;
+    }
 
     @Override
     public Map<String, Object> asMap() {
@@ -26,10 +29,15 @@ public class Status extends ComplexData<Status> {
 
     public ObservableList<String> getCollections() {
         ObservableList<String> collections = FXCollections.observableArrayList();
-        for (String status : statuses) {
-            collections.add(status);
+        collections.addAll(Arrays.asList(statuses));
+        if (collections.size() == 0) {
+            collections.add("No Keyboard Input");
         }
         return collections;
     }
 
+    @Override
+    public String toHumanReadableString() {
+        return statuses.length + " statuses";
+    }
 }

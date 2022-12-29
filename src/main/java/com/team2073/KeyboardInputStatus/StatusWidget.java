@@ -9,13 +9,14 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 
 import java.util.Map;
 
-@Description(name = "Statuses", dataTypes = Status.class, summary = "Status of keyboard inputted commands")
+@Description(name = "Status", dataTypes = Status.class, summary = "Status of keyboard inputted commands")
 @ParametrizedController("StatusWidget.fxml")
-public class StatusWidget extends SimpleAnnotatedWidget<Status> {
+public final class StatusWidget extends SimpleAnnotatedWidget<Status> {
 
     @FXML
     private Pane root;
@@ -24,7 +25,8 @@ public class StatusWidget extends SimpleAnnotatedWidget<Status> {
     private ListView<String> list;
 
     @FXML
-    public void initialize() {
+    @SuppressWarnings("incomplete-switch")
+    private void initialize() {
         list.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String message, boolean empty) {
@@ -45,7 +47,7 @@ public class StatusWidget extends SimpleAnnotatedWidget<Status> {
             }
         });
 
-        list.setSelectionModel(new NoSelectionModel<String>());
+        list.setSelectionModel(new NoSelectionModel<>());
         list.itemsProperty().bind(dataOrDefault.map(Status::getCollections));
     }
 
@@ -116,7 +118,7 @@ public class StatusWidget extends SimpleAnnotatedWidget<Status> {
 
         @Override
         public boolean isEmpty() {
-            return false;
+            return true;
         }
 
         @Override
