@@ -10,5 +10,5 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.team2073.KeyboardInputStatus.StatusWidget"
       fx:id="root">
-    <ListView fx:id="list"/>
+      <ListView fx:id="list"/>
 </VBox>
