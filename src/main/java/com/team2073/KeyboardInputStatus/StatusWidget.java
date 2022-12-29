@@ -2,7 +2,14 @@ package com.team2073.KeyboardInputStatus;
 
 import edu.wpi.first.shuffleboard.api.data.DataType;
 import edu.wpi.first.shuffleboard.api.widget.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.TextAlignment;
 
 import java.util.Map;
 
@@ -10,9 +17,116 @@ import java.util.Map;
 @ParametrizedController("StatusWidget.fxml")
 public class StatusWidget extends SimpleAnnotatedWidget<Status> {
 
-    @Override
-    public Pane getView() {
-        return null;
+    @FXML
+    private Pane root;
+
+    @FXML
+    private ListView<String> list;
+
+    @FXML
+    public void initialize() {
+        list.setCellFactory(param -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String message, boolean empty) {
+                super.updateItem(message, empty);
+                if (empty || message == null)
+                    setText(null);
+                else {
+                    setMinWidth(param.getWidth() - 32);
+                    setMaxWidth(param.getWidth() - 32);
+                    setPrefWidth(param.getWidth() - 32);
+
+                    setWrapText(true);
+                    setText(message);
+
+                    setTextAlignment(TextAlignment.LEFT);
+                    setStyle("-fx-alignment: left;");
+                }
+            }
+        });
+
+        list.setSelectionModel(new NoSelectionModel<String>());
+        list.itemsProperty().bind(dataOrDefault.map(Status::getCollections));
     }
 
+    @Override
+    public Pane getView() {
+        return root;
+    }
+
+    public class NoSelectionModel<T> extends MultipleSelectionModel<T> {
+
+        @Override
+        public ObservableList<Integer> getSelectedIndices() {
+            return FXCollections.emptyObservableList();
+        }
+
+        @Override
+        public ObservableList<T> getSelectedItems() {
+            return FXCollections.emptyObservableList();
+        }
+
+        @Override
+        public void selectAll() {
+        }
+
+        @Override
+        public void selectIndices(int index, int... indices) {
+        }
+
+        @Override
+        public void selectFirst() {
+
+        }
+
+        @Override
+        public void selectLast() {
+
+        }
+
+        @Override
+        public void clearAndSelect(int index) {
+
+        }
+
+        @Override
+        public void select(int index) {
+
+        }
+
+        @Override
+        public void select(T obj) {
+
+        }
+
+        @Override
+        public void clearSelection(int index) {
+
+        }
+
+        @Override
+        public void clearSelection() {
+
+        }
+
+        @Override
+        public boolean isSelected(int index) {
+            return false;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public void selectPrevious() {
+
+        }
+
+        @Override
+        public void selectNext() {
+
+        }
+    }
 }

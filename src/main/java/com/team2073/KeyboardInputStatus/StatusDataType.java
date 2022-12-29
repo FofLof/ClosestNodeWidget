@@ -9,7 +9,7 @@ public class StatusDataType extends ComplexDataType<Status> {
 
     private static final String TYPE_NAME = "Status";
 
-    private final static StatusDataType instance = new StatusDataType();
+    public static final StatusDataType instance = new StatusDataType();
 
     public StatusDataType() {
         super(TYPE_NAME, Status.class);
