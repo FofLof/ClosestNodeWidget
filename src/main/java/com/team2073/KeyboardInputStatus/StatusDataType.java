@@ -18,7 +18,7 @@ public final class StatusDataType extends ComplexDataType<Status> {
 
   @Override
   public Function<Map<String, Object>, Status> fromMap() {
-    return map ->  status = new Status((String[]) map.getOrDefault("status", new String[] {}));
+    return map ->  status = new Status((String[]) map.getOrDefault("statuses", new String[] {}));
   }
 
   @Override

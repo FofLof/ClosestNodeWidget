@@ -21,10 +21,11 @@ public final class Status extends ComplexData<Status> {
   @Override
   public Map<String, Object> asMap() {
 
-    return Map.of("status", statuses);
+    return Map.of("statuses", statuses);
   }
 
   public ObservableList<String> getCollections() {
+
     ObservableList<String> collections = FXCollections.observableArrayList();
     collections.addAll(Arrays.asList(statuses));
 
